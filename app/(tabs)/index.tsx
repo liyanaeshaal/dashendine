@@ -1,98 +1,206 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
-
-import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { Link } from 'expo-router';
+import { useRouter } from "expo-router";
+import { Pressable, SafeAreaView, StyleSheet, Text, View } from "react-native";
 
 export default function HomeScreen() {
-  return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
+  const router = useRouter();
 
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+  return (
+    <SafeAreaView style={styles.screen}>
+      <View style={styles.container}>
+        <View style={styles.logoCircle}>
+          <Text style={styles.logoText}>🍽️</Text>
+        </View>
+
+        <Text style={styles.kicker}>Dashendine</Text>
+
+        <Text style={styles.title}>
+          Decide where to eat, without the group debate.
+        </Text>
+
+        <Text style={styles.subtitle}>
+          Create a dining session, invite your people, swipe through
+          restaurants, and match when the group likes the same spot.
+        </Text>
+
+        <View style={styles.actions}>
+          <Pressable
+            style={styles.primaryButton}
+            onPress={() => router.push("/create" as never)}
+          >
+            <Text style={styles.primaryButtonText}>Create session</Text>
+          </Pressable>
+
+          <Pressable
+            style={styles.secondaryButton}
+            onPress={() => router.push("/join" as never)}
+          >
+            <Text style={styles.secondaryButtonText}>Join with code</Text>
+          </Pressable>
+        </View>
+
+        <View style={styles.previewCard}>
+          <View>
+            <Text style={styles.previewLabel}>Tonight&apos;s match</Text>
+            <Text style={styles.previewTitle}>Thai, ramen, or tacos?</Text>
+          </View>
+
+          <Text style={styles.previewEmoji}>🔥</Text>
+        </View>
+
+        <View style={styles.steps}>
+          <View style={styles.step}>
+            <Text style={styles.stepEmoji}>1</Text>
+            <Text style={styles.stepText}>Create a group session</Text>
+          </View>
+
+          <View style={styles.step}>
+            <Text style={styles.stepEmoji}>2</Text>
+            <Text style={styles.stepText}>Everyone swipes restaurants</Text>
+          </View>
+
+          <View style={styles.step}>
+            <Text style={styles.stepEmoji}>3</Text>
+            <Text style={styles.stepText}>Match on a shared favorite</Text>
+          </View>
+        </View>
+      </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  screen: {
+    flex: 1,
+    backgroundColor: "#FFF7ED",
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  container: {
+    flex: 1,
+    paddingHorizontal: 24,
+    paddingTop: 32,
+    paddingBottom: 24,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  logoCircle: {
+    width: 72,
+    height: 72,
+    borderRadius: 36,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#FFFFFF",
+    shadowColor: "#000",
+    shadowOpacity: 0.08,
+    shadowRadius: 18,
+    shadowOffset: { width: 0, height: 8 },
+    elevation: 4,
+  },
+  logoText: {
+    fontSize: 32,
+  },
+  kicker: {
+    marginTop: 28,
+    fontSize: 16,
+    fontWeight: "700",
+    color: "#F15A3B",
+    letterSpacing: 0.4,
+  },
+  title: {
+    marginTop: 12,
+    fontSize: 38,
+    lineHeight: 44,
+    fontWeight: "800",
+    color: "#21130D",
+  },
+  subtitle: {
+    marginTop: 16,
+    fontSize: 16,
+    lineHeight: 24,
+    color: "#6F5A4D",
+  },
+  actions: {
+    marginTop: 32,
+    gap: 12,
+  },
+  primaryButton: {
+    height: 56,
+    borderRadius: 28,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#F15A3B",
+    shadowColor: "#F15A3B",
+    shadowOpacity: 0.28,
+    shadowRadius: 16,
+    shadowOffset: { width: 0, height: 8 },
+    elevation: 4,
+  },
+  primaryButtonText: {
+    fontSize: 16,
+    fontWeight: "800",
+    color: "#FFFFFF",
+  },
+  secondaryButton: {
+    height: 56,
+    borderRadius: 28,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#FFFFFF",
+    borderWidth: 1,
+    borderColor: "#EFD1BD",
+  },
+  secondaryButtonText: {
+    fontSize: 16,
+    fontWeight: "800",
+    color: "#2B1A12",
+  },
+  previewCard: {
+    marginTop: 32,
+    padding: 20,
+    borderRadius: 28,
+    backgroundColor: "#2B1A12",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  previewLabel: {
+    fontSize: 13,
+    fontWeight: "700",
+    color: "#F7BFA7",
+  },
+  previewTitle: {
+    marginTop: 6,
+    fontSize: 20,
+    fontWeight: "800",
+    color: "#FFFFFF",
+  },
+  previewEmoji: {
+    fontSize: 34,
+  },
+  steps: {
+    marginTop: 24,
+    gap: 12,
+  },
+  step: {
+    minHeight: 54,
+    borderRadius: 20,
+    paddingHorizontal: 16,
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#FFFFFF",
+  },
+  stepEmoji: {
+    width: 28,
+    height: 28,
+    borderRadius: 14,
+    overflow: "hidden",
+    textAlign: "center",
+    lineHeight: 28,
+    fontSize: 14,
+    fontWeight: "800",
+    color: "#FFFFFF",
+    backgroundColor: "#F15A3B",
+  },
+  stepText: {
+    marginLeft: 12,
+    fontSize: 15,
+    fontWeight: "700",
+    color: "#352116",
   },
 });
