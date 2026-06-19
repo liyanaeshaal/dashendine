@@ -13,13 +13,10 @@ export default function HomeScreen() {
 
         <Text style={styles.kicker}>Dashendine</Text>
 
-        <Text style={styles.title}>
-          Decide where to eat, without the group debate.
-        </Text>
+        <Text style={styles.title}>Stop debating. Start eating.</Text>
 
         <Text style={styles.subtitle}>
-          Create a dining session, invite your people, swipe through
-          restaurants, and match when the group likes the same spot.
+          Swipe, match, and finally answer: “Where are we eating?”
         </Text>
 
         <View style={styles.actions}>
@@ -45,23 +42,6 @@ export default function HomeScreen() {
           </View>
 
           <Text style={styles.previewEmoji}>🔥</Text>
-        </View>
-
-        <View style={styles.steps}>
-          <View style={styles.step}>
-            <Text style={styles.stepEmoji}>1</Text>
-            <Text style={styles.stepText}>Create a group session</Text>
-          </View>
-
-          <View style={styles.step}>
-            <Text style={styles.stepEmoji}>2</Text>
-            <Text style={styles.stepText}>Everyone swipes restaurants</Text>
-          </View>
-
-          <View style={styles.step}>
-            <Text style={styles.stepEmoji}>3</Text>
-            <Text style={styles.stepText}>Match on a shared favorite</Text>
-          </View>
         </View>
       </View>
     </SafeAreaView>
@@ -172,35 +152,5 @@ const styles = StyleSheet.create({
   },
   previewEmoji: {
     fontSize: 34,
-  },
-  steps: {
-    marginTop: 24,
-    gap: 12,
-  },
-  step: {
-    minHeight: 54,
-    borderRadius: 20,
-    paddingHorizontal: 16,
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#FFFFFF",
-  },
-  stepEmoji: {
-    width: 28,
-    height: 28,
-    borderRadius: 14,
-    overflow: "hidden",
-    textAlign: "center",
-    lineHeight: 28,
-    fontSize: 14,
-    fontWeight: "800",
-    color: "#FFFFFF",
-    backgroundColor: "#F15A3B",
-  },
-  stepText: {
-    marginLeft: 12,
-    fontSize: 15,
-    fontWeight: "700",
-    color: "#352116",
   },
 });
